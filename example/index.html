@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+<style>
+  *{ margin: 0;padding: 0; }
+  html,body{ height: 100%; }
+  li{ list-style-type: none; }
+
+  #app{ height: 100%;position: relative; }
+
+  #app > .mash, #app > .story{ position: absolute;top: 0;right: 0;bottom: 0;left: 0; }
+
+  #app > .mash{ z-index: 2000; }
+
+  #app > .mash > img{ width: 50%;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%); }  
+
+
+  #app > .story{ 
+    z-index: 1000; 
+    overflow-x: auto;overflow-y: hidden; white-space: nowrap;font-size: 0;letter-spacing: 0;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+
+  .story > dt{ height: 100%;width: 100%;display: inline-block;vertical-align: top;position: relative; }
+  .story > dt:nth-of-type(1){ background-color: red; }
+  .story > dt:nth-of-type(2){ background-color: orange; }
+  .story > dt:nth-of-type(3){ background-color: yellow; }
+  .story > dt:nth-of-type(4){ background-color: green; }
+  .story > dt:nth-of-type(5){ background-color: cyan; }
+  .story > dt:nth-of-type(6){ background-color: blue; }
+  .story > dt:nth-of-type(7){ background-color: purple; }
+  
+</style>  
+</head>
+<body>
+  <div id="app">
+    <dl class="mash">
+      <img src="http://ohi69gup6.bkt.clouddn.com/005TGG6vly1fes9jc0kk0g30b40b40tv.gif">
+    </dl>
+    <dl class="story">
+      <dt></dt>
+      <dt></dt>
+      <dt></dt>
+      <dt></dt>
+      <dt></dt>
+      <dt></dt>
+      <dt></dt>
+    </dl>
+  </div>
+</body>
+<script src="../src/core/polyfill.js"></script>
+<script src="../src/core/tool.js"></script>
+<script src="../src/core/gesture.js"></script>
+<script>
+  var tool = new iTool();
+
+  var gesture = new iGesture({
+    mashEl: "#app > .mash",
+    storyEl: "#app > .story",
+    validFlipDistance: 100,
+    frameDistance: 10,
+    afterTouchstart: function(touch) {
+      console.log("touchstart: ", touch);
+    },
+    touchmoving: function(touch, distance) {
+      console.log("touchmoving");
+    },
+    afterTouchend: function(currentPage, isValidLastPage) {
+      console.log("touchend");
+
+      var link = document.querySelector('.mash .link');
+    }
+  });
+
+  (function _init(){
+    tool.forbidSpringback();
+  })();
+</script>
+</html>
