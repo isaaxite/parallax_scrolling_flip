@@ -57,17 +57,15 @@
     </dl>
   </div>
 </body>
-<script src="../src/core/polyfill.js"></script>
-<script src="../src/core/tool.js"></script>
-<script src="../src/core/gesture.js"></script>
+<script src="../src/core/iflip.min.js"></script>
 <script>
   var tool = new iTool();
 
   var gesture = new iGesture({
     mashEl: "#app > .mash",
     storyEl: "#app > .story",
-    validFlipDistance: 100,
-    frameDistance: 10,
+    validFlipDistance: 60,
+    frameDistance: 20,
     afterTouchstart: function(touch) {
       console.log("touchstart: ", touch);
     },
