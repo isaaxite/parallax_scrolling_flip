@@ -5,6 +5,8 @@
 - [tool.js](https://github.com/issaxite/parallax_scrolling_flip/blob/master/src/core/tool.js)
 - [gesture.js](https://github.com/issaxite/parallax_scrolling_flip/blob/master/src/core/gesture.js)
 
+# 预览
+![](http://ohi69gup6.bkt.clouddn.com/20180223010924.GIF)
 
 ### 例子
 - [example-1](https://issaxite.github.io/parallax_scrolling_flip/example/)
