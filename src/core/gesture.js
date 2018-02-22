@@ -5,18 +5,22 @@
  **/
 function iGesture(options) {
   iTool.call(this);
+  this.currentPage = 1;
   this.touchStartX = 0;
   this.screenWidth = document.body.scrollWidth;
+
+  // 可配置-start
   this.mash = document.querySelector(options.mashEl);
   this.story = document.querySelector(options.storyEl);
   
-  this.currentPage = 1;
   this.validFlipDistance = options.validFlipDistance || this.screenWidth / 10;
   this.frameDistance = options.frameDistance || 30;
 
   this.afterTouchstart = options.afterTouchstart;
   this.afterTouchend = options.afterTouchend;
   this.touchmoving = options.touchmoving;
+  // 可配置-end
+
   this.init();
 }
 
