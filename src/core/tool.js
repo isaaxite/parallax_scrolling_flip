@@ -1,4 +1,11 @@
-function iTool() {}
+function iTool() {
+  if(typeof iTool.instance === 'object'){ 
+    return iTool.instance; 
+  } 
+  this.createTime = new Date();
+  iTool.instance = this; 
+  return this;
+}
 
 Object.assign(iTool.prototype, {
   asyncRootPx: function() {
