@@ -1,5 +1,14 @@
 # parallax_scrolling_flip
-视差翻页滚动
+纯js（ES5）实现的视差翻页滚动，核心代码在`/src/core/`目录下
+
+- [polyfill.js](https://github.com/issaxite/parallax_scrolling_flip/blob/master/src/core/polyfill.js)
+- [tool.js](https://github.com/issaxite/parallax_scrolling_flip/blob/master/src/core/tool.js)
+- [gesture.js](https://github.com/issaxite/parallax_scrolling_flip/blob/master/src/core/gesture.js)
+
+
+### 例子
+- [example-1](https://issaxite.github.io/parallax_scrolling_flip/example/)
+- [example-2](https://issaxite.github.io/parallax_scrolling_flip/)
 
 # 引入
 ```html
@@ -36,3 +45,25 @@
 ```
 
 ### 全部功能
+```js
+var tool = new iTool();
+var gesture = new iGesture({
+  mashEl: "#app > .mash",	// 上层视图
+  storyEl: "#app > .story",	// 下层元素
+  validFlipDistance: 60,	// 最小有效偏移距离
+  frameDistance: 20,		// 偏移距离(px)/帧
+  afterTouchstart: function(touch) {	
+    console.log("touchstart: ", touch);
+  },
+  touchmoving: function(touch, distance) {
+    console.log("touchmoving");
+  },
+  afterTouchend: function(currentPage, isValidLastPage) {
+    console.log("touchend");
+  }
+});
+
+(function _init(){
+  tool.forbidSpringback();
+})();
+```
