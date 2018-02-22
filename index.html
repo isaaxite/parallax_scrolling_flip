@@ -92,8 +92,8 @@
       var signImage = [sign.getAttribute('data-src')];
       var images = (function(story){
         var _images = [];
-        var a = Array().every.call(story.children, function(item, index){
-          var isFirstFinish = index === 0;
+        
+        Array.prototype.every.call(story.children, function(item, index){
           return _images.push(item.children[0].getAttribute("data-bgImage"));
         });
         return _images;
