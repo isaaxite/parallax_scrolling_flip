@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./src/style.min.css">
+  <title>手势翻页</title>
+</head>
+<body>
+<div id="myapp">
+  <div id="spinner">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+  <dl class="mash">
+      <div class="sign">
+        <img data-src="http://sl-cdn.hingyin.com/o_1c5tr1fr855g193m1env154q6sqh.png">
+      </div>
+      <div class="link">
+        <a href="javascript:;" ontouchstart="location.href = '/Game/buddism_jd';">进入</a>
+      </div>
+      <ul class="indicator">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+  </dl>
+  <ul class="story">
+    <li><i data-bgImage="http://sl-cdn.hingyin.com/o_1c5tqsntrc714q1ktmpo3b7k7.png"></i></li>
+    <li><i data-bgImage="http://sl-cdn.hingyin.com/o_1c5tqtmu71eeo11it1goghpl1jt9c.png"></i></li>
+    <li><i data-bgImage="http://sl-cdn.hingyin.com/o_1c5tqoan3iqj1nie1q704rs3g51p.png"></i></li>
+    <li><i data-bgImage="http://sl-cdn.hingyin.com/o_1c5tqpa3re8jr2u1mjf329f281u.png"></i></li>
+  </ul>
+  <audio id="bgm" loop="true" style="position: absolute;z-index: 1000000;">
+    <source src="http://sl-cdn.hingyin.com/o_1c5tpmhf41hsr1mji17u2emr1qg710.mp3" type="audio/mp3">
+    <source src="http://sl-cdn.hingyin.com/o_1c5tq4rnm16e5o4h1nis1iatnmb1f.ogg" type="audio/ogg">
+    您的浏览器不支持音频播放
+  </audio>
+</div>
+<script src="./src/tool.js"></script>
+<script src="./src/loader.js"></script>
+<script src="./src/bgm.js"></script>
+<script src="./src/indicator.js"></script>
+<script src="./src/gesture.js"></script>
+<script>
+  var tool = new iTool();
+  var loading = new iLoader({
+    activeClass: "active",
+    spinnerEl: "#spinner"
+  });
+
+  var bgm = new Bgm({
+    bgmEl: "#bgm"
+  });
+
+  var indicator = new iIndicator({
+    activeClass: "active",
+    indicators: ".indicator > li",
+  });
+
+  var gesture = new iGesture({
+    mashEl: "#myapp > .mash",
+    storyEl: "#myapp > .story",
+    afterTouchstart: function(touch) {
+      console.log("touchstart: ", touch);
+    },
+    touchmoving: function(touch, distance) {
+      console.log("touchmoving");
+    },
+    afterTouchend: function(currentPage, isValidLastPage) {
+      console.log("touchend");
+
+      var link = document.querySelector('.mash .link');
+
+      indicator.update(currentPage - 1);
+      isValidLastPage && link.classList.add('active');
+    }
+  });
+
+  (function __init(){
+    tool.asyncRootPx();
+    tool.forbidSpringback();
+
+    (function _preLoadBgImage(){
+      var sign = document.querySelector(".sign img");
+      var mash = document.querySelector("#myapp > .mash");
+      var story = document.querySelector("#myapp > .story");
+      var signImage = [sign.getAttribute('data-src')];
+      var images = (function(story){
+        var _images = [];
+        var a = Array().every.call(story.children, function(item, index){
+          var isFirstFinish = index === 0;
+          return _images.push(item.children[0].getAttribute("data-bgImage"));
+        });
+        return _images;
+      })(story);
+
+      tool.preLoadBgImage(signImage, function(src){
+        sign.src = src;
+        loading.show();
+        tool.preLoadBgImage(images, function(src, index) {
+          var view = story.children[index].children[0];
+          view.style.backgroundImage = "url("+ src +")";
+        }, function _complete(){
+          loading.hide();
+        });
+      });
+    })()
+  })();
+</script>
+</body>
+</html>

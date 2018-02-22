@@ -1,0 +1,99 @@
+@import './_reset';
+@import './_function';
+@import './_spinner';
+
+*{ box-sizing: border-box;-webkit-tap-highlight-color: rgba(0,0,0,0); }
+  .hidden.hidden.hidden.hidden{ display: none; }
+  html,body{ height: 100%;margin: 0;padding: 0; }
+  a{ text-decoration: none; }
+  ul, li{ margin: 0;padding: 0;list-style-type: none; }
+
+// animation
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+
+#myapp{ 
+  &{ position: relative; height: 100%;width: 100%;overflow: hidden; }
+  &::before{ content: "";display: block;position: absolute;top: 0;right: 0;bottom: 0;left: 0;z-index: 10;background: #FFFFFF; }
+}
+
+.mash{ position: absolute;top: 0;right: 0;bottom: 0;left: 0;z-index: 1000;margin: 0; }
+
+.mash > .sign{
+  position: absolute;
+  left: 50%;bottom: px2rem(27);z-index: 2000;
+  transform: translateX(-50%);
+}
+
+.mash > .sign img{
+  width: px2rem(170);
+}
+
+.mash .link{
+  position: absolute;
+  top: px2rem(32);
+  width: px2rem(217);
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+}
+
+.mash .link.active{
+  opacity: 1;
+}
+
+.mash .link.fadeOut{
+  opacity: 0;
+}
+
+.mash .link > a{
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  line-height: px2rem(43);
+  text-align: center;
+  white-space: nowrap;
+  background-color: #E5CD8D;
+  border: px2rem(1) solid #6C4B27;
+  border-radius: px2rem(4);
+  font-family: 'Jtiejinlisu';
+  font-size: px2rem(18);
+  color: #6E4C2B;
+}
+
+.mash > .indicator{
+  position: absolute;right: 0;bottom: 0;left: 0;text-align: center;font-size: 0;
+  padding-bottom: px2rem(10);
+}
+
+.indicator > li{
+  display: inline-block;vertical-align: top;
+  width: px2rem(8);height: px2rem(8);margin: 0 px2rem(8);
+  border-radius: 50%;
+  background: rgb(180, 180, 180);
+  box-shadow: rgb(218, 144, 144);
+}
+
+.indicator > li.active{
+  background: #FFFFFF;
+}
+
+.story{ 
+  overflow-x: auto;overflow-y: hidden; white-space: nowrap;font-size: 0;letter-spacing: 0;
+  position: absolute;top: 0; right: 0;bottom: px2rem(-50);left: 0;
+  z-index: 100;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.story > li{ height: 100%;width: 100%;display: inline-block;vertical-align: top;position: relative; }
+.story > li > i{ display: block;background: center center no-repeat;background-size: cover;position: absolute;top: 0; right: 0;bottom: px2rem(50);left: 0;  }
